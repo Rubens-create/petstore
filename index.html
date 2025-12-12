@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Store - Produtos para Animais de Estimação</title>
+    <meta name="description" content="Pet Store - Produtos de qualidade e atendimento especializado em Goiânia.">
+    
+    <style>
+        /* --- Configurações Gerais --- */
+        :root {
+            --primary-color: #27ae60; /* Verde principal */
+            --primary-hover: #219150;
+            --secondary-color: #2c3e50; /* Azul escuro/Cinza */
+            --accent-color: #f39c12; /* Amarelo/Laranja para estrelas */
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-dark); background-color: #fff; }
+        
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- Header --- */
+        header { background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .nav-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; }
+        
+        /* Logo Imagem */
+        .logo-img { 
+            max-height: 70px; 
+            width: auto; 
+            display: block;
+        }
+
+        .btn-header { background-color: var(--secondary-color); color: white; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; }
+        .btn-header:hover { background-color: #34495e; transform: translateY(-2px); }
+
+        /* --- Hero Section (COM FOTO DE FUNDO) --- */
+        .hero { 
+            /* 
+               Aqui está a imagem de fundo. 
+               O gradiente (rgba) serve para escurecer a foto e deixar o texto branco legível.
+            */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=1920&auto=format&fit=crop'); 
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white; 
+            padding: 100px 0; 
+            text-align: center; 
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.95; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+
+        /* --- Seção Missão, Visão e Valores --- */
+        .mvv-section { padding: 60px 0; background-color: #fff; text-align: center; }
+        
+        .mvv-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+            margin-bottom: 50px;
+        }
+
+        .mvv-card {
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .mvv-card:hover { transform: translateY(-5px); border-color: var(--primary-color); }
+        
+        .mvv-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .mvv-card h3 { color: var(--secondary-color); margin-bottom: 15px; font-size: 1.4rem; }
+        .mvv-card p { color: #666; font-size: 0.95rem; }
+
+        /* Botão Grande CTA */
+        .cta-container { margin-top: 10px; }
+        .btn-large {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .btn-large:hover {
+            background-color: var(--primary-hover);
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.6);
+        }
+
+        /* --- Seção de Avaliações --- */
+        .reviews-section { padding: 70px 0; background-color: var(--bg-light); border-top: 1px solid #eee; }
+        .section-title { text-align: center; margin-bottom: 40px; }
+        .section-title h2 { font-size: 2rem; color: var(--secondary-color); margin-bottom: 10px; }
+        
+        .google-header { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 30px; font-weight: bold; color: #555; }
+        .google-logo { color: #4285F4; font-weight: 900; }
+        
+        .reviews-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+        }
+
+        .review-card { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            border: 1px solid #e0e0e0;
+        }
+        
+        .reviewer-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; }
+        .reviewer-name { font-weight: bold; font-size: 1rem; color: #202124; }
+        .reviewer-meta { font-size: 0.75rem; color: #777; display: block; }
+        .stars { color: var(--accent-color); font-size: 1rem; letter-spacing: 2px; }
+        .review-text { color: #555; font-size: 0.9rem; line-height: 1.5; font-style: italic; }
+
+        /* --- Footer / Dados Legais --- */
+        footer { background-color: #1a252f; color: #bdc3c7; padding: 50px 0 20px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        
+        .footer-col h3 { color: white; margin-bottom: 15px; border-left: 3px solid var(--primary-color); padding-left: 10px; }
+        .company-data p { margin-bottom: 10px; }
+        .cnpj-box { font-family: monospace; color: #fff; font-weight: bold; }
+        
+        /* Link do Maps no rodapé */
+        .maps-link { color: var(--primary-color); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 5px; }
+        .maps-link:hover { text-decoration: underline; color: #fff; }
+
+        .copyright { text-align: center; padding-top: 20px; border-top: 1px solid #34495e; font-size: 0.8rem; opacity: 0.8; }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-bar { flex-direction: column; gap: 15px; }
+            .logo-img { max-height: 80px; }
+            .btn-large { width: 100%; text-align: center; font-size: 1rem; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegação -->
+    <header>
+        <div class="container nav-bar">
+            <div class="logo">
+                <img src="https://segulnohcbvkkojbetjf.supabase.co/storage/v1/object/public/fotodeperfil/baixados.jpg" alt="Logo Pet Store" class="logo-img">
+            </div>
+            <a href="https://wa.me/556285396587" class="btn-header">WhatsApp</a>
+        </div>
+    </header>
+
+    <!-- Banner Hero (Com Imagem de Fundo) -->
+    <section class="hero">
+        <div class="container">
+            <h1>Cuidado e Carinho para seu Melhor Amigo</h1>
+            <p>Encontre os melhores produtos, rações e atendimento especializado em Goiânia.</p>
+        </div>
+    </section>
+
+    <!-- Seção Missão, Visão e Valores e Botão CTA -->
+    <section class="mvv-section">
+        <div class="container">
+            <div class="mvv-grid">
+                
+                <!-- Card Missão -->
+                <div class="mvv-card">
+                    <span class="mvv-icon">🎯</span>
+                    <h3>Nossa Missão</h3>
+                    <p>Proporcionar saúde e alegria para pets e tutores através de produtos de excelência e um atendimento que entende o amor pelos animais.</p>
+                </div>
+
+                <!-- Card Visão -->
+                <div class="mvv-card">
+                    <span class="mvv-icon">👁️</span>
+                    <h3>Nossa Visão</h3>
+                    <p>Ser a referência em pet shop em Goiânia, reconhecida pela agilidade na entrega, variedade de produtos e confiança dos clientes.</p>
+                </div>
+
+                <!-- Card Valores -->
+                <div class="mvv-card">
+                    <span class="mvv-icon">❤️</span>
+                    <h3>Nossos Valores</h3>
+                    <p>Amor aos animais, transparência no atendimento, agilidade, qualidade nos produtos e respeito total ao cliente.</p>
+                </div>
+
+            </div>
+
+            <!-- Botão de Ação (CTA) Grande -->
+            <div class="cta-container">
+                <a href="https://wa.me/556285396587" class="btn-large">
+                    🐾 Fazer Pedido Agora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos (Prova Social) -->
+    <section class="reviews-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>O que nossos clientes dizem</h2>
+                <div class="google-header">
+                    <span style="font-size: 1.2rem;">4.9</span>
+                    <span class="stars">★★★★★</span>
+                    <span>no <span class="google-logo">Google</span> Maps</span>
+                </div>
+            </div>
+
+            <div class="reviews-grid">
+                
+                <div class="review-card">
+                    <div class="reviewer-header">
+                        <div>
+                            <div class="reviewer-name">Ana Pedrosa</div>
+                            <span class="reviewer-meta">Local Guide · 11 avaliações</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">"Pedi para entregar com Uber moto e mesmo passando do horário o Alex foi solicito e simpático. Prestou um ótimo atendimento do início ao fim. Obrigada, Alex! Que Deus te abençoe."</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="reviewer-header">
+                        <div>
+                            <div class="reviewer-name">DIMER CHAVEIRO 24 Hs</div>
+                            <span class="reviewer-meta">Local Guide · 26 avaliações</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">"Pessoal bastante empenhado a levar melhor atendimento... Comprei ração pros meus Pets. Com entrega no horário combinado tudo certinho Perfeito. Estamos muitíssimo Satisfeito indicarei Sempre!"</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="reviewer-header">
+                        <div>
+                            <div class="reviewer-name">Letícia Mendanha</div>
+                            <span class="reviewer-meta">Local Guide · 51 avaliações</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">"Equipe qualificada, bom atendimento, meu Tunico ganhou petisco, amou. Preço dentro da média, entrega rápida. Parabéns a todos envolvidos."</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="reviewer-header">
+                        <div>
+                            <div class="reviewer-name">Victor</div>
+                            <span class="reviewer-meta">3 avaliações</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">"Pessoal com atendimentos excelente, sempre muito rápido nas entregas e com um preço muito bom! Recomendo demais, sou cliente há bastante tempo já."</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="reviewer-header">
+                        <div>
+                            <div class="reviewer-name">Regina Duarte</div>
+                            <span class="reviewer-meta">10 avaliações</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">"Estou muito satisfeita com o atendimento personalizado. O vendedor Paulo sempre muito atencioso e prestativo."</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="reviewer-header">
+                        <div>
+                            <div class="reviewer-name">Larissa Ribeiro Calixto</div>
+                            <span class="reviewer-meta">Local Guide · 5 avaliações</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">"Ótimo atendimento, produtos de qualidade, preço justo, entrega rápida, sou cliente há um tempo e recomendo o serviço"</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé: Dados Oficiais (Verificação Meta) -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                
+                <!-- Sobre -->
+                <div class="footer-col">
+                    <h3>Sobre Nós</h3>
+                    <p>Referência em produtos para animais de estimação. Trabalhamos com dedicação para garantir o bem-estar do seu pet.</p>
+                    <p style="margin-top: 10px; color: var(--primary-color); font-weight: bold;">Atuando Desde 2023</p>
+                </div>
+
+                <!-- Dados da Empresa -->
+                <div class="footer-col company-data">
+                    <h3>Dados da Empresa</h3>
+                    <p><strong>Razão Social:</strong><br> PET STORE PRODUTOS PARA ANIMAIS DE ESTIMACAO LTDA</p>
+                    <p><strong>CNPJ:</strong> <span class="cnpj-box">53.091.174/0001-73</span></p>
+                    
+                    <!-- Endereço com Link para o Maps -->
+                    <p><strong>Endereço:</strong><br>
+                        Avenida T9, Quadra CH Lote 1B, Loja Luc015<br>
+                        Goiânia, Goiás - CEP: 74310-320<br>
+                        <a href="https://maps.app.goo.gl/GMeuY899RWqwfvL87" target="_blank" class="maps-link">📍 Ver localização no Google Maps</a>
+                    </p>
+                </div>
+
+                <!-- Contato -->
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p><strong>Telefone Comercial:</strong><br> 
+                    <a href="https://wa.me/556285396587" style="color: white;">+55 (62) 8539-6587</a></p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2023 Pet Store Ltda. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
